@@ -7,7 +7,12 @@ on:
     - cron: "40 12 * * *"
     - cron: "5 18 * * *"
     - cron: "50 23 * * *"
-  workflow_dispatch: {} # manual trigger
+  workflow_dispatch:
+    inputs:
+      force:
+        description: "Force publish next article regardless of date"
+        required: false
+        default: "false"
 
 permissions:
   contents: write
@@ -27,7 +32,12 @@ jobs:
           node-version: "20"
 
       - name: Run publish script
-        run: node scheduled-articles/publish.mjs
+        run: |
+          if [ "${{ github.event.inputs.force }}" = "true" ]; then
+            node scheduled-articles/publish.mjs --force
+          else
+            node scheduled-articles/publish.mjs
+          fi
 
       - name: Commit and push if changed
         run: |
