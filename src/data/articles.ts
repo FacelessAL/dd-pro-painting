@@ -15,7 +15,7 @@
 export const articles: Article[] = [
   {
     slug: "how-to-choose-interior-paint-colors",
-    title: "How to Choose the Perfect Interior Paint Colors for Your Home in 2024",
+    title: "How to Choose the Perfect Interior Paint Colors for Your Home in 2026",
     metaDescription:
       "Master interior paint color selection with expert guidance on undertones, lighting, and color flow. D&D Pro Painting shares professional strategies for Illinois homeowners.",
     heroImage: "https://images.unsplash.com/photo-1562259949-e8e7689d7828?w=1200&q=80",
@@ -624,7 +624,7 @@ Greige - the greige-beige hybrid neutral - entered the mainstream in 2018 and ha
 
 ## Soft Sages and Muted Greens
 
-The biggest color trend of 2024-2026 is the return of soft, muted greens. We are specifying these colors 3-4x more frequently than we were in 2020.
+The biggest color trend of 2026 is the return of soft, muted greens. We are specifying these colors 3-4x more frequently than we were in 2020.
 
 **Sherwin-Williams Evergreen Fog (SW 9130)** - 2022 Color of the Year for Sherwin-Williams, and still gaining in popularity. Beautiful on cabinets, accent walls, and even as primary wall color in bathrooms and offices.
 
