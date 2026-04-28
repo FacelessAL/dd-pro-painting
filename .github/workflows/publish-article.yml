@@ -1,0 +1,42 @@
+name: Publish Scheduled Article
+
+on:
+  schedule:
+    # Check four times daily at varied hours (UTC)
+    - cron: "15 6 * * *"
+    - cron: "40 12 * * *"
+    - cron: "5 18 * * *"
+    - cron: "50 23 * * *"
+  workflow_dispatch: {} # manual trigger
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Run publish script
+        run: node scheduled-articles/publish.mjs
+
+      - name: Commit and push if changed
+        run: |
+          git config user.name "DD Pro Painting Bot"
+          git config user.email "bot@ddpropainting.net"
+          git add -A
+          if git diff --staged --quiet; then
+            echo "No articles to publish today."
+          else
+            git commit -m "Auto-publish scheduled article $(date +%Y-%m-%d)"
+            git push
+          fi
