@@ -110,6 +110,14 @@ async function main() {
   // read current articles.ts
   let articlesTS = fs.readFileSync(ARTICLES_FILE, "utf-8");
 
+  // prevent duplicates
+  if (articlesTS.includes(`slug: "${article.slug}"`)) {
+    console.log(`[publish] Article "${article.slug}" already exists in articles.ts - skipping insert, moving to published.`);
+    fs.mkdirSync(PUBLISHED_DIR, { recursive: true });
+    fs.renameSync(path.join(QUEUE_DIR, file), path.join(PUBLISHED_DIR, file));
+    process.exit(0);
+  }
+
   // insert before the closing ];
   const insertPoint = articlesTS.lastIndexOf("];");
   if (insertPoint === -1) {
